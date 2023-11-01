@@ -103,7 +103,7 @@ export default function Reset() {
           />
         )}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

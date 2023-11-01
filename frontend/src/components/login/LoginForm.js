@@ -51,9 +51,9 @@ export default function LoginForm({ setVisible }) {
   return (
     <div className="login_wrap">
       <div className="login_1">
-        <img src="../../icons/facebook.svg" alt="" />
+        <img src="../../icons/logo.png" alt="" />
         <span>
-          Facebook helps you connect and share with the people in your life.
+          Blogify helps you connect and share with the people in your life.
         </span>
       </div>
       <div className="login_2">

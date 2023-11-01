@@ -32,11 +32,11 @@
 .input_error {
   position: relative;
   padding: 15px 10px;
-  background: #b94a48;
+  background: #d20124;
   width: 100%;
   color: #fff;
-  font-size: 13px;
-  border-radius: 5px;
+  font-size: 16px;
+  border-radius: 12px;
   margin-bottom: 15px;
 }
 .error_arrow_top {
