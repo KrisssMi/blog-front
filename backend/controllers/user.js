@@ -13,6 +13,7 @@ const { generateToken } = require("../helpers/tokens");
 const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const generateCode = require("../helpers/generateCode");
 const mongoose = require("mongoose");
+
 exports.register = async (req, res) => {
   try {
     const {
@@ -25,6 +26,7 @@ exports.register = async (req, res) => {
       bMonth,
       bDay,
       gender,
+      role,
     } = req.body;
 
     if (!validateEmail(email)) {
@@ -42,17 +44,17 @@ exports.register = async (req, res) => {
 
     if (!validateLength(first_name, 3, 30)) {
       return res.status(400).json({
-        message: "first name must between 3 and 30 characters.",
+        message: "First name must between 3 and 30 characters.",
       });
     }
     if (!validateLength(last_name, 3, 30)) {
       return res.status(400).json({
-        message: "last name must between 3 and 30 characters.",
+        message: "Last name must between 3 and 30 characters.",
       });
     }
     if (!validateLength(password, 6, 40)) {
       return res.status(400).json({
-        message: "password must be atleast 6 characters.",
+        message: "Password must be atleast 6 characters.",
       });
     }
 
@@ -66,10 +68,12 @@ exports.register = async (req, res) => {
       email,
       password: cryptedPassword,
       username: newUsername,
+      blocked,
       bYear,
       bMonth,
       bDay,
       gender,
+      role,
     }).save();
     const emailVerificationToken = generateToken(
       { id: user._id.toString() },
@@ -86,7 +90,9 @@ exports.register = async (req, res) => {
       last_name: user.last_name,
       token: token,
       verified: user.verified,
-      message: "Register Success ! please activate your email to start",
+      role: user.role,
+      blocked: user.blocked,
+      message: "Register Success! Please activate your email to start",
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -112,12 +118,13 @@ exports.activateAccount = async (req, res) => {
       await User.findByIdAndUpdate(user.id, { verified: true });
       return res
         .status(200)
-        .json({ message: "Account has beeen activated successfully." });
+        .json({ message: "Account has been activated successfully." });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -125,13 +132,19 @@ exports.login = async (req, res) => {
     if (!user) {
       return res.status(400).json({
         message:
-          "the email address you entered is not connected to an account.",
+          "The email address you entered is not connected to an account.",
+      });
+    }
+    // Проверка заблокирован ли пользователь:
+    if (user.blocked) {
+      return res.status(403).json({
+        message: "Access denied. This account is blocked.",
       });
     }
     const check = await bcrypt.compare(password, user.password);
     if (!check) {
       return res.status(400).json({
-        message: "Invalid credentials.Please try again.",
+        message: "Invalid credentials. Please try again.",
       });
     }
     const token = generateToken({ id: user._id.toString() }, "7d");
@@ -143,11 +156,13 @@ exports.login = async (req, res) => {
       last_name: user.last_name,
       token: token,
       verified: user.verified,
+      role: user.role,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.sendVerification = async (req, res) => {
   try {
     const id = req.user.id;
@@ -170,6 +185,7 @@ exports.sendVerification = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.findUser = async (req, res) => {
   try {
     const { email } = req.body;
@@ -217,7 +233,7 @@ exports.validateResetCode = async (req, res) => {
         message: "Verification code is wrong..",
       });
     }
-    return res.status(200).json({ message: "ok" });
+    return res.status(200).json({ message: "Ok" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -233,7 +249,7 @@ exports.changePassword = async (req, res) => {
       password: cryptedPassword,
     }
   );
-  return res.status(200).json({ message: "ok" });
+  return res.status(200).json({ message: "Ok" });
 };
 
 exports.getProfile = async (req, res) => {
@@ -325,6 +341,7 @@ exports.updateDetails = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.addFriend = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -356,6 +373,7 @@ exports.addFriend = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.cancelRequest = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -374,7 +392,7 @@ exports.cancelRequest = async (req, res) => {
         await sender.updateOne({
           $pull: { following: sender._id },
         });
-        res.json({ message: "you successfully canceled request" });
+        res.json({ message: "You successfully canceled request" });
       } else {
         return res.status(400).json({ message: "Already Canceled" });
       }
@@ -387,6 +405,7 @@ exports.cancelRequest = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.follow = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -414,6 +433,7 @@ exports.follow = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.unfollow = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -430,7 +450,7 @@ exports.unfollow = async (req, res) => {
         await sender.updateOne({
           $pull: { following: receiver._id },
         });
-        res.json({ message: "unfollow success" });
+        res.json({ message: "Unfollow success" });
       } else {
         return res.status(400).json({ message: "Already not following" });
       }
@@ -441,6 +461,7 @@ exports.unfollow = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.acceptRequest = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -456,7 +477,7 @@ exports.acceptRequest = async (req, res) => {
         await receiver.updateOne({
           $pull: { requests: sender._id },
         });
-        res.json({ message: "friend request accepted" });
+        res.json({ message: "Friend request accepted" });
       } else {
         return res.status(400).json({ message: "Already friends" });
       }
@@ -469,6 +490,7 @@ exports.acceptRequest = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.unfriend = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -493,7 +515,7 @@ exports.unfriend = async (req, res) => {
           },
         });
 
-        res.json({ message: "unfriend request accepted" });
+        res.json({ message: "Unfriend request accepted" });
       } else {
         return res.status(400).json({ message: "Already not friends" });
       }
@@ -504,6 +526,7 @@ exports.unfriend = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.deleteRequest = async (req, res) => {
   try {
     if (req.user.id !== req.params.id) {
@@ -522,7 +545,7 @@ exports.deleteRequest = async (req, res) => {
           },
         });
 
-        res.json({ message: "delete request accepted" });
+        res.json({ message: "Delete request accepted" });
       } else {
         return res.status(400).json({ message: "Already deleted" });
       }
@@ -545,6 +568,7 @@ exports.search = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.addToSearchHistory = async (req, res) => {
   try {
     const { searchUser } = req.body;
@@ -575,6 +599,7 @@ exports.addToSearchHistory = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.getSearchHistory = async (req, res) => {
   try {
     const results = await User.findById(req.user.id)
@@ -585,6 +610,7 @@ exports.getSearchHistory = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.removeFromSearch = async (req, res) => {
   try {
     const { searchUser } = req.body;
@@ -598,6 +624,7 @@ exports.removeFromSearch = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
 exports.getFriendsPageInfos = async (req, res) => {
   try {
     const user = await User.findById(req.user.id)
@@ -612,6 +639,85 @@ exports.getFriendsPageInfos = async (req, res) => {
       requests: user.requests,
       sentRequests,
     });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deletePost = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    var user = await User.findById(req.user.id);
+    var roleUser = user.role;
+
+    if (!req.user || roleUser !== "Admin") {
+      return res
+        .status(403)
+        .json({ message: "Access denied. You do not have admin rights." });
+    }
+
+    await post.remove();
+    res.json({ message: "Post deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    var roleUser = user.role;
+
+    if (roleUser === "Admin") {
+      const commentIndex = post.comments.findIndex(
+        (comment) => comment._id.toString() === req.params.commentId
+      );
+      if (commentIndex === -1) {
+        return res.status(404).json({ message: "Comment not found" });
+      }
+
+      post.comments.splice(commentIndex, 1); // удаление комментария
+      await post.save();
+      res.json({ message: "Comment deleted successfully" });
+    } else {
+      return res.status(403).json({ message: "Access denied." });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.blockUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    var userAdmin = await User.findById(req.user.id);
+    var roleUser = userAdmin.role;
+
+    if (!req.user || roleUser !== "Admin") {
+      return res
+        .status(403)
+        .json({ message: "Access denied. You do not have admin rights." });
+    }
+
+    await user.updateOne({ blocked: true }); // изменение поля blocked на true
+    res.json({ message: "User blocked successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

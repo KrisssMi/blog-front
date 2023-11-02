@@ -4,6 +4,12 @@ const { ObjectId } = mongoose.Schema;
 
 const userSchema = mongoose.Schema(
   {
+    role: {
+      type: String,
+      required: true,
+      enum: ["User", "Admin"],
+      default: "User",
+    },
     first_name: {
       type: String,
       required: [true, "first name is required"],
@@ -23,7 +29,6 @@ const userSchema = mongoose.Schema(
       text: true,
       unique: true,
     },
-
     email: {
       type: String,
       required: [true, "email is required"],
@@ -38,6 +43,10 @@ const userSchema = mongoose.Schema(
       trim: true,
       default:
         "https://res.cloudinary.com/dmhcnhtng/image/upload/v1643044376/avatars/default_pic_jeaybr.png",
+    },
+    blocked: {
+      type: Boolean,
+      default: false,
     },
     cover: {
       type: String,

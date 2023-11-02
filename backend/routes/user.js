@@ -25,6 +25,9 @@ const {
   getSearchHistory,
   removeFromSearch,
   getFriendsPageInfos,
+  deletePost,
+  deleteComment,
+  blockUser,
 } = require("../controllers/user");
 const { authUser } = require("../middlwares/auth");
 
@@ -54,5 +57,11 @@ router.put("/addToSearchHistory", authUser, addToSearchHistory);
 router.get("/getSearchHistory", authUser, getSearchHistory);
 router.put("/removeFromSearch", authUser, removeFromSearch);
 router.get("/getFriendsPageInfos", authUser, getFriendsPageInfos);
+
+// Admin routes:
+router.delete("/admin/deletePost/:postId", authUser, deletePost);
+router.delete("/admin/deleteComment/:postId/:commentId", authUser, deleteComment);
+// Блокировать пользователя:
+router.put("/admin/blockUser/:userId", authUser, blockUser);
 
 module.exports = router;

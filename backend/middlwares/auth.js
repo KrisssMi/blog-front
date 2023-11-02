@@ -12,7 +12,7 @@ exports.authUser = async (req, res, next) => {
       if (err) {
         return res.status(400).json({ message: "Invalid Authentification" });
       }
-      req.user = user;
+      req.user = user;  
       next();
     });
   } catch (error) {
