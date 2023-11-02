@@ -52,9 +52,11 @@ export default function LoginForm({ setVisible }) {
     <div className="login_wrap">
       <div className="login_1">
         <img src="../../icons/logo.png" alt="" />
+        <img className="circle" src="../../icons/circle.png" alt="" />
         <span>
           Blogify helps you connect and share with the people in your life.
         </span>
+        <img className="circle_1" src="../../icons/circle.png" alt="" />
       </div>
       <div className="login_2">
         <div className="login_2_wrap">
@@ -91,7 +93,7 @@ export default function LoginForm({ setVisible }) {
             )}
           </Formik>
           <Link to="/reset" className="forgot_password">
-            Forgotten password?
+            Forgot password?
           </Link>
           <DotLoader color="#1876f2" loading={loading} size={30} />
 
@@ -101,11 +103,12 @@ export default function LoginForm({ setVisible }) {
             className="blue_btn open_signup"
             onClick={() => setVisible(true)}
           >
-            Create Account
+            Create new account
           </button>
         </div>
         <Link to="/" className="sign_extra">
-          <b>Create a Page</b> for a celebrity, brand or business.
+          <b>Create a Page</b> to share amazing and memorable events with other
+          people.
         </Link>
       </div>
     </div>

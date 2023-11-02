@@ -1,21 +1,25 @@
 /*-------login-----*/
 .login_wrapper {
   background: var(--bg-secondary);
+  height: 900px;
 }
 
 .login_wrap {
-  height: 100vh;
   color: var(--color-primary);
+  height: 750px;
 }
 .login_1 {
   width: 300px;
   margin: 0 auto;
+  z-index: 2;
 }
 .login_1 span {
   font-size: 20px;
+  z-index: 2;
 }
 .login_2 {
   text-align: center;
+  z-index: 2;
 }
 .login_2_wrap {
   display: flex;
@@ -23,14 +27,16 @@
   align-items: center;
   gap: 1rem;
   background: var(--bg-primary);
-  box-shadow: 0 1px 2px var(--shadow-1);
+  box-shadow: 0 2px 32px var(--shadow-1);
   padding: 1rem;
   padding-bottom: 2rem;
   width: 350px;
+  height: -moz-fit-content;
   height: fit-content;
   margin: 1rem auto;
+  -webkit-user-select: none;
   user-select: none;
-  border-radius: 10px;
+  border-radius: 15px;
 }
 .login_2_wrap button {
   width: 100%;
@@ -52,7 +58,7 @@
   background: var(--bg-third);
 }
 .open_signup {
-  background: var(--green-color);
+  background: var(--blue-color);
   width: 70% !important;
   font-weight: 600 !important;
   font-size: 17px !important;
@@ -60,6 +66,26 @@
 }
 .sign_extra {
   font-size: 15px;
+}
+
+.circle:not(.img) {
+  position: absolute;
+  top: -280px;
+  left: -50px;
+  width: 70%;
+  height: 120%;
+  z-index: 1;
+  opacity: 0.2;
+}
+
+.circle_1:not(.img) {
+  position: absolute;
+  bottom: -170px;
+  right: -140px;
+  width: 42%;
+  height: 70%;
+  z-index: 1;
+  opacity: 0.3;
 }
 /*-------login-----*/
 
@@ -233,7 +259,7 @@
   color: #b94a48;
 }
 .success_text {
-  color: var(--green-color);
+  color: var(--blue-color);
 }
 /*----error and success styles -------*/
 
@@ -275,11 +301,14 @@
     margin-bottom: 15vh;
   }
   .login_1 img {
-    width: 300px;
+    width: 480px;
     margin-left: -1.7rem;
+    z-index: 2;
   }
   .login_1 span {
     font-size: 28px;
+    margin-top: -100px;
+    z-index: 2;
   }
   .login_2_wrap {
     width: 400px;
