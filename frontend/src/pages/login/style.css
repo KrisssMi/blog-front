@@ -96,8 +96,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background: var(--bg-primary);
-  box-shadow: 0 1px 2px var(--shadow-1);
-  border-radius: 10px;
+  box-shadow: 0 5px 20px var(--shadow-1);
+  border-radius: 15px;
   padding: 15px;
   padding-bottom: 1rem;
   width: 350px;
@@ -120,11 +120,12 @@
 .register_header span:first-of-type {
   font-weight: 700;
   font-size: 32px;
+  text-align: center;
 }
-.register_header span:last-of-type {
+/* .register_header span:last-of-type {
   font-size: 15px;
   color: var(--color-secondary);
-}
+} */
 .register_form {
   width: 100%;
   display: flex;
@@ -162,7 +163,7 @@
   width: 100%;
 }
 .reg_grid select {
-  width: 90px;
+  width: 190px;
   font-size: 16px;
   color: var(--color-primary);
   background: var(--bg-primary);
@@ -170,7 +171,7 @@
   cursor: pointer;
 }
 .reg_grid label {
-  width: 90px;
+  width: 190px;
   display: flex;
   align-items: center;
   justify-content: space-between;

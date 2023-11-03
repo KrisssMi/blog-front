@@ -35,7 +35,7 @@ export default function GenderSelect({ handleRegisterChange, genderError }) {
           onChange={handleRegisterChange}
         />
       </label>
-      <label htmlFor="custom">
+      {/* <label htmlFor="custom">
         Custom
         <input
           type="radio"
@@ -44,7 +44,7 @@ export default function GenderSelect({ handleRegisterChange, genderError }) {
           value="custom"
           onChange={handleRegisterChange}
         />
-      </label>
+      </label> */}
       {genderError && (
         <div
           className={
