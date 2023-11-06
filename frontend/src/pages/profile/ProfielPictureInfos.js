@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import ProfilePicture from "../../components/profielPicture";
 import Friendship from "./Friendship";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 export default function ProfielPictureInfos({
   profile,
   visitor,
@@ -10,6 +12,8 @@ export default function ProfielPictureInfos({
 }) {
   const [show, setShow] = useState(false);
   const pRef = useRef(null);
+  const { user } = useSelector((state) => ({ ...state }));
+
   return (
     <div className="profile_img_wrap">
       {show && <ProfilePicture setShow={setShow} pRef={pRef} photos={photos} />}

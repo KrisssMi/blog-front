@@ -85,6 +85,17 @@ a {
   gap: 6px;
   cursor: pointer;
 }
+
+.blocked {
+  background-color: red; /* Цвет красной кнопки */
+  color: white; /* Цвет текста внутри кнопки */
+}
+
+.unblocked {
+  background-color: green; /* Цвет зеленой кнопки */
+  color: white; /* Цвет текста внутри кнопки */
+}
+
 .blue_btn,
 .gray_btn span {
   transform: translateY(-1px);

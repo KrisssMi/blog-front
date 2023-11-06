@@ -68,7 +68,7 @@ exports.register = async (req, res) => {
       email,
       password: cryptedPassword,
       username: newUsername,
-      blocked,
+      blocked: false,
       bYear,
       bMonth,
       bDay,
@@ -718,6 +718,29 @@ exports.blockUser = async (req, res) => {
 
     await user.updateOne({ blocked: true }); // изменение поля blocked на true
     res.json({ message: "User blocked successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.unblockUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    var userAdmin = await User.findById(req.user.id);
+    var roleUser = userAdmin.role;
+
+    if (!req.user || roleUser !== "Admin") {
+      return res
+        .status(403)
+        .json({ message: "Access denied. You do not have admin rights." });
+    }
+
+    await user.updateOne({ blocked: false }); // изменение поля blocked на false
+    res.json({ message: "User unblocked successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

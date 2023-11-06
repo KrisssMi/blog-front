@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import useClickOutside from "../../helpers/clickOutside";
 import { useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import {
   acceptRequest,
   addFriend,
@@ -9,12 +12,18 @@ import {
   follow,
   unfollow,
   unfriend,
+  blockUser,
+  unblockUser,
 } from "../../functions/user";
+
 export default function Friendship({ friendshipp, profileid }) {
   const [friendship, setFriendship] = useState(friendshipp);
   useEffect(() => {
     setFriendship(friendshipp);
   }, [friendshipp]);
+  const [isBlocked, setIsBlocked] = useState(
+    localStorage.getItem("isBlocked") === "true"
+  );
   const [friendsMenu, setFriendsMenu] = useState(false);
   const [respondMenu, setRespondMenu] = useState(false);
   const menu = useRef(null);
@@ -22,6 +31,32 @@ export default function Friendship({ friendshipp, profileid }) {
   useClickOutside(menu, () => setFriendsMenu(false));
   useClickOutside(menu1, () => setRespondMenu(false));
   const { user } = useSelector((state) => ({ ...state }));
+
+  const isAdmin = user.role === "Admin";
+
+  const blockUserHandler = async () => {
+    if (isAdmin) {
+      const userIdToBlock = profileid;
+      const userToken = user.token;
+
+      if (isBlocked) {
+        // Если пользователь уже заблокирован, разблокируйте его
+        await unblockUser(userIdToBlock, userToken);
+        toast.success("User is unblocked");
+      } else {
+        // В противном случае, заблокируйте его
+        await blockUser(userIdToBlock, userToken);
+        toast.success("User is blocked");
+      }
+
+      // Переключите состояние isBlocked
+      setIsBlocked(!isBlocked);
+      localStorage.setItem("isBlocked", !isBlocked);
+    } else {
+      toast.error("You are not an admin");
+    }
+  };
+
   const addFriendHandler = async () => {
     setFriendship({ ...friendship, requestSent: true, following: true });
     await addFriend(profileid, user.token);
@@ -71,6 +106,15 @@ export default function Friendship({ friendshipp, profileid }) {
 
   return (
     <div className="friendship">
+      <div
+        className={`gray_btn ${isBlocked ? "blocked" : "unblocked"}`}
+        style={{ width: "130px" }}
+      >
+        <div onClick={blockUserHandler}>
+          {isBlocked ? "Unblock user" : "Block user"}
+        </div>
+      </div>
+      <ToastContainer />
       {friendship?.friends ? (
         <div className="friends_menu_wrap">
           <button className="gray_btn" onClick={() => setFriendsMenu(true)}>
@@ -117,7 +161,11 @@ export default function Friendship({ friendshipp, profileid }) {
       ) : (
         !friendship?.requestSent &&
         !friendship?.requestReceived && (
-          <button className="blue_btn" onClick={() => addFriendHandler()}>
+          <button
+            className="blue_btn"
+            style={{ width: "130px" }}
+            onClick={() => addFriendHandler()}
+          >
             <img src="../../../icons/addFriend.png" alt="" className="invert" />
             <span>Add Friend</span>
           </button>

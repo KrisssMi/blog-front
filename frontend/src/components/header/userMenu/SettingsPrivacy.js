@@ -18,7 +18,7 @@ export default function SettingsPrivacy({ setVisible }) {
         </div>
         <span>Settings</span>
       </div>
-      <div className="mmenu_item hover3">
+      {/* <div className="mmenu_item hover3">
         <div className="small_circle">
           <i className="privacy_checkup_icon"></i>
         </div>
@@ -41,7 +41,8 @@ export default function SettingsPrivacy({ setVisible }) {
           <i className="news_icon"></i>
         </div>
         <span>News Feed Prefrences</span>
-      </div>
+      </div> */}
+
       <div className="mmenu_item hover3">
         <div className="small_circle">
           <i className="language_icon"></i>

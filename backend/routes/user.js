@@ -28,6 +28,7 @@ const {
   deletePost,
   deleteComment,
   blockUser,
+  unblockUser,
 } = require("../controllers/user");
 const { authUser } = require("../middlwares/auth");
 
@@ -63,5 +64,6 @@ router.delete("/admin/deletePost/:postId", authUser, deletePost);
 router.delete("/admin/deleteComment/:postId/:commentId", authUser, deleteComment);
 // Блокировать пользователя:
 router.put("/admin/blockUser/:userId", authUser, blockUser);
+router.put("/admin/unblockUser/:userId", authUser, unblockUser);
 
 module.exports = router;

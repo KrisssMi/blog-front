@@ -100,7 +100,7 @@ export default function Header({ page, getAllPosts }) {
           <img src={user?.picture} alt="" />
           <span>{user?.first_name}</span>
         </Link>
-        <div
+        {/* <div
           className={`circle_icon hover1 ${showAllMenu && "active_header"}`}
           ref={allmenu}
         >
@@ -122,7 +122,7 @@ export default function Header({ page, getAllPosts }) {
         <div className="circle_icon hover1">
           <Notifications />
           <div className="right_notification">5</div>
-        </div>
+        </div> */}
         <div
           className={`circle_icon hover1 ${showUserMenu && "active_header"}`}
           ref={usermenu}

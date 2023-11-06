@@ -1,4 +1,39 @@
 import axios from "axios";
+
+export const blockUser = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/admin/blockUser/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return "ok";
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+
+export const unblockUser = async (id, token) => {
+  try {
+    const { data } = await axios.put(
+      `${process.env.REACT_APP_BACKEND_URL}/admin/unblockUser/${id}`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return "ok";
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
+
 export const updateprofilePicture = async (url, token) => {
   try {
     const { data } = await axios.put(
@@ -17,6 +52,7 @@ export const updateprofilePicture = async (url, token) => {
     return error.response.data.message;
   }
 };
+
 export const updateCover = async (url, token) => {
   try {
     const { data } = await axios.put(
