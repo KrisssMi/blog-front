@@ -6,6 +6,7 @@ import { saveAs } from "file-saver";
 
 export default function PostMenu({
   postUserId,
+  userRole,
   userId,
   imagesLength,
   setShowMenu,
@@ -16,7 +17,9 @@ export default function PostMenu({
   images,
   postRef,
 }) {
-  const [test, setTest] = useState(postUserId === userId ? true : false);
+  const [test, setTest] = useState(
+    postUserId === userId || userRole == "Admin" ? true : false
+  );
   const menu = useRef(null);
   useOnClickOutside(menu, () => setShowMenu(false));
   const saveHandler = async () => {
@@ -34,8 +37,9 @@ export default function PostMenu({
   };
   const deleteHandler = async () => {
     const res = await deletePost(postId, token);
-    if (res.status === "ok") {
+    if (res.status === 200) {
       postRef.current.remove();
+      window.location.reload();
     }
   };
   return (

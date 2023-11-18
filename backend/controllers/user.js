@@ -644,62 +644,6 @@ exports.getFriendsPageInfos = async (req, res) => {
   }
 };
 
-exports.deletePost = async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.postId);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-
-    var user = await User.findById(req.user.id);
-    var roleUser = user.role;
-
-    if (!req.user || roleUser !== "Admin") {
-      return res
-        .status(403)
-        .json({ message: "Access denied. You do not have admin rights." });
-    }
-
-    await post.remove();
-    res.json({ message: "Post deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-exports.deleteComment = async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.postId);
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-
-    const user = await User.findById(req.user.id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    var roleUser = user.role;
-
-    if (roleUser === "Admin") {
-      const commentIndex = post.comments.findIndex(
-        (comment) => comment._id.toString() === req.params.commentId
-      );
-      if (commentIndex === -1) {
-        return res.status(404).json({ message: "Comment not found" });
-      }
-
-      post.comments.splice(commentIndex, 1); // удаление комментария
-      await post.save();
-      res.json({ message: "Comment deleted successfully" });
-    } else {
-      return res.status(403).json({ message: "Access denied." });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 exports.blockUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);

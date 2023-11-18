@@ -13,16 +13,17 @@ exports.createPost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
   try {
-    const followingTemp = await User.findById(req.user.id).select("following");
-    const following = followingTemp.following;
-    const promises = following.map((user) => {
+    const followingTemp = await User.findById(req.user.id).select("friends");
+    const friends = followingTemp.friends;
+    const promises = friends.map((user) => {
       return Post.find({ user: user })
         .populate("user", "first_name last_name picture username cover")
         .populate("comments.commentBy", "first_name last_name picture username")
         .sort({ createdAt: -1 })
         .limit(10);
     });
-    const followingPosts = await (await Promise.all(promises)).flat();
+    followingPosts = await (await Promise.all(promises)).flat();
+
     const userPosts = await Post.find({ user: req.user.id })
       .populate("user", "first_name last_name picture username cover")
       .populate("comments.commentBy", "first_name last_name picture username")
@@ -95,9 +96,59 @@ exports.savePost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    await Post.findByIdAndRemove(req.params.id);
-    res.json({ status: "Ok" });
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    var user = await User.findById(req.user.id);
+    var roleUser = user.role;
+
+    if (
+      !req.user ||
+      (roleUser !== "Admin" && post.user.toString() !== req.user.id)
+    ) {
+      return res
+        .status(403)
+        .json({ message: "Access denied. You do not have admin rights." });
+    }
+
+    await post.remove();
+    res.json({ message: "ok" });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deleteComment = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    const user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    var roleUser = user.role;
+
+    if (roleUser === "Admin") {
+      const commentIndex = post.comments.findIndex(
+        (comment) => comment._id.toString() === req.params.commentId
+      );
+      if (commentIndex === -1) {
+        return res.status(404).json({ message: "Comment not found" });
+      }
+
+      post.comments.splice(commentIndex, 1); // удаление комментария
+      await post.save();
+      res.json({ message: "Comment deleted successfully" });
+    } else {
+      return res.status(403).json({ message: "Access denied." });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

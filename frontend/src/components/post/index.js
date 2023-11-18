@@ -269,6 +269,7 @@ export default function Post({ post, user, profile }) {
       {showMenu && (
         <PostMenu
           userId={user.id}
+          userRole={user.role}
           postUserId={post.user._id}
           imagesLength={post?.images?.length}
           setShowMenu={setShowMenu}
