@@ -134,14 +134,19 @@ exports.deleteComment = async (req, res) => {
 
     var roleUser = user.role;
 
-    if (roleUser === "Admin") {
-      const commentIndex = post.comments.findIndex(
-        (comment) => comment._id.toString() === req.params.commentId
-      );
-      if (commentIndex === -1) {
-        return res.status(404).json({ message: "Comment not found" });
-      }
+    const commentIndex = post.comments.findIndex(
+      (comment) => comment._id.toString() === req.params.commentId
+    );
 
+    if (commentIndex === -1) {
+      return res.status(404).json({ message: "Comment not found" });
+    }
+
+    if (
+      roleUser === "Admin" ||
+      post.user.toString() === req.user.id ||
+      post.comments[commentIndex].commentBy.toString() === req.user.id
+    ) {
       post.comments.splice(commentIndex, 1); // удаление комментария
       await post.save();
       res.json({ message: "Comment deleted successfully" });

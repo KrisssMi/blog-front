@@ -61,6 +61,9 @@ export default function Post({ post, user, profile }) {
     setCount((prev) => prev + 3);
   };
   const postRef = useRef(null);
+  const deleteComment = async (commentId) => {
+    setComments((prev) => prev.filter((x) => x._id !== commentId));
+  };
   return (
     <div
       className="post"
@@ -259,7 +262,15 @@ export default function Post({ post, user, profile }) {
               return new Date(b.commentAt) - new Date(a.commentAt);
             })
             .slice(0, count)
-            .map((comment, i) => <Comment comment={comment} key={i} />)}
+            .map((comment, i) => (
+              <Comment
+                comment={comment}
+                post={post}
+                user={user}
+                delComment={deleteComment}
+                key={comment._id}
+              />
+            ))}
         {count < comments.length && (
           <div className="view_comments" onClick={() => showMore()}>
             View more comments

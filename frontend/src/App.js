@@ -25,7 +25,6 @@ function App() {
     getAllPosts();
   }, [user]);
   const getAllPosts = async () => {
-    console.log("SAFSDGVSVSD");
     try {
       dispatch({
         type: "POSTS_REQUEST",

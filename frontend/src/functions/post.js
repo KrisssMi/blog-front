@@ -117,3 +117,20 @@ export const deletePost = async (postId, token) => {
     return error.response.data.message;
   }
 };
+
+export const deleteComment = async (postId, commentId, token) => {
+  try {
+    const data = await axios.delete(
+      `${process.env.REACT_APP_BACKEND_URL}/deleteComment/${postId}/${commentId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return data;
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
