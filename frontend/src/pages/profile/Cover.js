@@ -99,17 +99,17 @@ export default function Cover({ cover, visitor, photos }) {
           cRef.current.src = res[0].url;
         } else {
           setLoading(false);
-
           setError(new_post);
         }
       } else {
         setLoading(false);
-
         setError(updated_picture);
       }
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);
+    } finally {
+      window.location.reload();
     }
   };
   return (

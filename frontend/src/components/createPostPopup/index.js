@@ -134,7 +134,7 @@ export default function CreatePostPopup({
             <div className="box_privacy">
               <img src="../../../icons/public.png" alt="" />
               <span>Public</span>
-              <i className="arrowDown_icon"></i>
+              {/* <i className="arrowDown_icon"></i> */}
             </div>
           </div>
         </div>

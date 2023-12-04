@@ -529,6 +529,10 @@
 .view_comments:hover {
   text-decoration: underline;
 }
+.comment_name {
+  display: flex;
+  justify-content: space-between;
+}
 /*----Comment-----------*/
 /*------Post menu------*/
 @media (max-width: 435px) {

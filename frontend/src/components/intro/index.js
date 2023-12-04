@@ -56,7 +56,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
   };
   return (
     <div className="profile_card">
-      <div className="profile_card_header">Intro</div>
+      <div className="profile_card_header">Description</div>
       {details?.bio && !showBio && (
         <div className="info_col">
           <span className="info_text">{details?.bio}</span>

@@ -129,7 +129,7 @@ export default function Profile({ getAllPosts }) {
             photos={photos.resources}
             othername={othername}
           />
-          <ProfileMenu />
+          {/* <ProfileMenu /> */}
         </div>
       </div>
       <div className="profile_bottom">

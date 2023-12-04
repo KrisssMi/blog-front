@@ -103,6 +103,8 @@ export default function UpdateProfilePicture({
     } catch (error) {
       setLoading(false);
       setError(error.response.data.message);
+    } finally {
+      window.location.reload();
     }
   };
   return (

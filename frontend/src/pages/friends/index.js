@@ -35,9 +35,9 @@ export default function Friends() {
         <div className="friends_left">
           <div className="friends_left_header">
             <h3>Friends</h3>
-            <div className="small_circle">
+            {/* <div className="small_circle">
               <i className="settings_filled_icon"></i>
-            </div>
+            </div> */}
           </div>
           <div className="friends_left_wrap">
             <Link
@@ -82,7 +82,7 @@ export default function Friends() {
                 <i className="right_icon"></i>
               </div>
             </Link>
-            <div className="mmenu_item hover3">
+            {/* <div className="mmenu_item hover3">
               <div className="small_circle">
                 <i className="friends_suggestions_icon"></i>
               </div>
@@ -90,7 +90,7 @@ export default function Friends() {
               <div className="rArrow">
                 <i className="right_icon"></i>
               </div>
-            </div>
+            </div> */}
             <Link
               to="/friends/all"
               className={`mmenu_item hover3 ${
@@ -105,7 +105,7 @@ export default function Friends() {
                 <i className="right_icon"></i>
               </div>
             </Link>
-            <div className="mmenu_item hover3">
+            {/* <div className="mmenu_item hover3">
               <div className="small_circle">
                 <i className="birthdays_icon"></i>
               </div>
@@ -113,8 +113,8 @@ export default function Friends() {
               <div className="rArrow">
                 <i className="right_icon"></i>
               </div>
-            </div>
-            <div className="mmenu_item hover3">
+            </div> */}
+            {/* <div className="mmenu_item hover3">
               <div className="small_circle">
                 <i className="all_friends_icon"></i>
               </div>
@@ -122,7 +122,7 @@ export default function Friends() {
               <div className="rArrow">
                 <i className="right_icon"></i>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="friends_right">

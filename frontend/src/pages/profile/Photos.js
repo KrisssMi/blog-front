@@ -7,7 +7,7 @@ export default function Photos({ username, token, photos }) {
     <div className="profile_card">
       <div className="profile_card_header">
         Photos
-        <div className="profile_header_link">See all photos</div>
+        {/* <div className="profile_header_link">See all photos</div> */}
       </div>
       <div className="profile_card_count">
         {photos.total_count === 0

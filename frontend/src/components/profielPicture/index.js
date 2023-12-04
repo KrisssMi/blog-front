@@ -73,7 +73,7 @@ export default function ProfilePicture({ username, setShow, pRef, photos }) {
           </div>
         )}
         <div className="old_pictures_wrap scrollbar">
-          <h4>your profile pictures</h4>
+          <h4>Your profile pictures</h4>
           <div className="old_pictures">
             {photos
               .filter(
@@ -88,7 +88,7 @@ export default function ProfilePicture({ username, setShow, pRef, photos }) {
                 />
               ))}
           </div>
-          <h4>other pictures</h4>
+          <h4>Other pictures</h4>
           <div className="old_pictures">
             {photos
               .filter(

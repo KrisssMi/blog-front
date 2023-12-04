@@ -21,20 +21,25 @@ export default function Comment({ comment, post, user, delComment }) {
         <div className="comment_wrap">
           <div className="comment_name">
             {comment.commentBy.first_name} {comment.commentBy.last_name}
+            {(user.role == "Admin" ||
+              post.user._id == user.id ||
+              comment.commentBy._id == user.id) && (
+              <button
+                style={{ border: "none", cursor: "pointer" }}
+                onClick={deleteHandler}
+              >
+                <img style={{ width: 15 }} src="icons/cross.svg" />
+              </button>
+            )}
           </div>
           <div className="comment_text">{comment.comment}</div>
-          {(user.role == "Admin" ||
-            post.user._id == user.id ||
-            comment.commentBy._id == user.id) && (
-            <button onClick={deleteHandler}>delete</button>
-          )}
         </div>
         {comment.image && (
           <img src={comment.image} alt="" className="comment_image" />
         )}
         <div className="comment_actions">
-          <span>Like</span>
-          <span>Reply</span>
+          {/* <span>Like</span>
+          <span>Reply</span> */}
           <span>
             <Moment fromNow interval={30}>
               {comment.commentAt}

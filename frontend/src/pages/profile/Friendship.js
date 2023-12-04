@@ -106,14 +106,16 @@ export default function Friendship({ friendshipp, profileid }) {
 
   return (
     <div className="friendship">
-      <div
-        className={`gray_btn ${isBlocked ? "blocked" : "unblocked"}`}
-        style={{ width: "130px" }}
-      >
-        <div onClick={blockUserHandler}>
-          {isBlocked ? "Unblock user" : "Block user"}
+      {isAdmin && (
+        <div
+          className={`gray_btn ${isBlocked ? "blocked" : "unblocked"}`}
+          style={{ width: "130px" }}
+        >
+          <div onClick={blockUserHandler}>
+            {isBlocked ? "Unblock user" : "Block user"}
+          </div>
         </div>
-      </div>
+      )}
       <ToastContainer />
       {friendship?.friends ? (
         <div className="friends_menu_wrap">
@@ -218,14 +220,14 @@ export default function Friendship({ friendshipp, profileid }) {
             <span>Follow</span>
           </button>
         )}
-        <button className={friendship?.friends ? "blue_btn" : "gray_btn"}>
+        {/* <button className={friendship?.friends ? "blue_btn" : "gray_btn"}>
           <img
             src="../../../icons/message.png"
             className={friendship?.friends && "invert"}
             alt=""
           />
           <span>Message</span>
-        </button>
+        </button> */}
       </div>
     </div>
   );

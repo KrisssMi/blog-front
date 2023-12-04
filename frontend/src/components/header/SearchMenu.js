@@ -49,7 +49,7 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
       <div className="search_wrap">
         <div className="header_logo">
           <div
-            className="circle hover1"
+            // className="circle hover1"
             onClick={() => {
               setShowSearchMenu(false);
             }}
@@ -86,8 +86,8 @@ export default function SearchMenu({ color, setShowSearchMenu, token }) {
       </div>
       {results == "" && (
         <div className="search_history_header">
-          <span>Recent searches</span>
-          <a>Edit</a>
+          <span>Recent searches:</span>
+          {/* <a>Edit</a> */}
         </div>
       )}
       <div className="search_history scrollbar">

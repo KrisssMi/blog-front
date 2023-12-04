@@ -94,7 +94,7 @@ export default function Post({ post, user, profile }) {
               <Moment fromNow interval={30}>
                 {post.createdAt}
               </Moment>
-              . <Public color="#828387" />
+              {/* <Public color="#828387" /> */}
             </div>
           </div>
         </Link>
@@ -239,14 +239,14 @@ export default function Post({ post, user, profile }) {
             {check ? check : "Like"}
           </span>
         </div>
-        <div className="post_action hover1">
+        {/*<div className="post_action hover1">
           <i className="comment_icon"></i>
           <span>Comment</span>
         </div>
         <div className="post_action hover1">
           <i className="share_icon"></i>
           <span>Share</span>
-        </div>
+        </div> */}
       </div>
       <div className="comments_wrap">
         <div className="comments_order"></div>

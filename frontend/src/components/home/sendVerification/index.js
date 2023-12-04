@@ -31,7 +31,7 @@ export default function SendVerification({ user }) {
           sendVerificationLink();
         }}
       >
-        click here to resend verification link
+        Click here to resend verification link
       </a>
       {success && <div className="success_text">{success}</div>}
       {error && <div className="error_text">{error}</div>}

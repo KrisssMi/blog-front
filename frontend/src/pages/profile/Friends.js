@@ -4,7 +4,7 @@ export default function Friends({ friends }) {
     <div className="profile_card">
       <div className="profile_card_header">
         Friends
-        <div className="profile_header_link">See all friends</div>
+        {/* <div className="profile_header_link">See all friends</div> */}
       </div>
       {friends && (
         <div className="profile_card_count">

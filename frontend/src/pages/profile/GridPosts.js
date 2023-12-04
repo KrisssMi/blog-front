@@ -6,7 +6,7 @@ export default function GridPosts() {
         style={{ justifyContent: "space-between" }}
       >
         <div className="left_header_grid">Posts</div>
-        <div className="flex">
+        {/* <div className="flex">
           <div className="gray_btn">
             <i className="equalize_icon"></i>
           </div>
@@ -14,10 +14,10 @@ export default function GridPosts() {
             <i className="manage_icon"></i>
             Manage Posts
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="create_splitter"></div>
-      <div className="createPost_body grid2">
+      {/* <div className="createPost_body grid2">
         <div className="view_type active">
           <i className="list_icon filter_blue"></i>
           List view
@@ -26,7 +26,7 @@ export default function GridPosts() {
           <i className="grid_icon"></i>
           Grid view
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

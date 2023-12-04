@@ -73,10 +73,10 @@ export default function ProfielPictureInfos({
         <Friendship friendshipp={profile?.friendship} profileid={profile._id} />
       ) : (
         <div className="profile_w_right">
-          <div className="blue_btn">
+          {/* <div className="blue_btn">
             <img src="../../../icons/plus.png" alt="" className="invert" />
             <span>Add to story</span>
-          </div>
+          </div> */}
           <div className="gray_btn">
             <i className="edit_icon"></i>
             <span>Edit profile</span>
