@@ -10,7 +10,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import OldCovers from "./OldCovers";
 
 export default function Cover({ cover, visitor, photos }) {
-  const [showCoverMneu, setShowCoverMenu] = useState(false);
+  const [showCoverMenu, setShowCoverMenu] = useState(false);
   const [coverPicture, setCoverPicture] = useState("");
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
@@ -175,7 +175,7 @@ export default function Cover({ cover, visitor, photos }) {
             <i className="camera_filled_icon"></i>
             Add Cover Photo
           </div>
-          {showCoverMneu && (
+          {showCoverMenu && (
             <div className="open_cover_menu" ref={menuRef}>
               <div
                 className="open_cover_menu_item hover1"

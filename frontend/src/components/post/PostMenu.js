@@ -98,14 +98,14 @@ export default function PostMenu({
           />
         </div>
       )}
-      {!test && <div className="line"></div>}
+      {/* {!test && <div className="line"></div>}
       {!test && (
         <MenuItem
           img="../../../icons/report.png"
           title="Report post"
           subtitle="i'm concerned about this post"
         />
-      )}
+      )} */}
     </ul>
   );
 }

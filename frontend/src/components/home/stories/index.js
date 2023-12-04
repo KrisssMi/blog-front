@@ -27,7 +27,7 @@ export default function Stories() {
     : stories.length;
   return (
     <div className="stories">
-      <div className="create_story_card">
+      {/* <div className="create_story_card">
         <img
           src="../../../images/default_pic.png"
           alt=""
@@ -37,7 +37,7 @@ export default function Stories() {
           <Plus color="#fff" />
         </div>
         <div className="story_create_text">Create Story</div>
-      </div>
+      </div> */}
       {stories.slice(0, max).map((story, i) => (
         <Story story={story} key={i} />
       ))}

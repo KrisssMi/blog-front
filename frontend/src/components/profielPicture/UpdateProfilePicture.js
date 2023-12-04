@@ -160,14 +160,14 @@ export default function UpdateProfilePicture({
         <div className="gray_btn" onClick={() => getCroppedImage("show")}>
           <i className="crop_icon"></i>Crop photo
         </div>
-        <div className="gray_btn">
+        {/* <div className="gray_btn">
           <i className="temp_icon"></i>Make Temporary
-        </div>
+        </div> */}
       </div>
-      <div className="flex_p_t">
+      {/* <div className="flex_p_t">
         <i className="public_icon"></i>
         Your profile picture is public
-      </div>
+      </div> */}
       <div className="update_submit_wrap">
         <div className="blue_link" onClick={() => setImage("")}>
           Cancel
