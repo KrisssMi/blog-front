@@ -58,10 +58,10 @@ export default function ProfilePicture({ username, setShow, pRef, photos }) {
               <i className="plus_icon filter_blue"></i>
               Upload photo
             </button>
-            <button className="gray_btn">
+            {/* <button className="gray_btn">
               <i className="frame_icon"></i>
               Add frame
-            </button>
+            </button> */}
           </div>
         </div>
         {error && (

@@ -21,10 +21,10 @@ export default function EditDetails({
         </div>
         <div className="details_wrapper scrollbar">
           <div className="details_col">
-            <span>Customize Your Intro</span>
+            <span>Customize your discription</span>
             <span>Details you select will be public</span>
           </div>
-          <div className="details_header">Other Name</div>
+          <div className="details_header">Other name</div>
           <Detail
             value={details?.otherName}
             img="studies"

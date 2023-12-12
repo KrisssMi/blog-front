@@ -168,7 +168,7 @@ export default function RegisterForm({ setVisible }) {
               <div className="reg_line">
                 <RegisterInput
                   type="text"
-                  placeholder="Mobile number or email address"
+                  placeholder="Email address"
                   name="email"
                   onChange={handleRegisterChange}
                 />
@@ -182,9 +182,7 @@ export default function RegisterForm({ setVisible }) {
                 />
               </div>
               <div className="reg_col">
-                <div className="reg_line_header">
-                  Date of birth:
-                </div>
+                <div className="reg_line_header">Date of birth:</div>
                 <DateOfBirthSelect
                   bDay={bDay}
                   bMonth={bMonth}
@@ -197,16 +195,14 @@ export default function RegisterForm({ setVisible }) {
                 />
               </div>
               <div className="reg_col">
-                <div className="reg_line_header">
-                  Gender:
-                </div>
+                <div className="reg_line_header">Gender:</div>
 
                 <GenderSelect
                   handleRegisterChange={handleRegisterChange}
                   genderError={genderError}
                 />
               </div>
-              
+
               <div className="reg_btn_wrapper">
                 <button className="blue_btn open_signup">Sign Up</button>
               </div>

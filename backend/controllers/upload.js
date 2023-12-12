@@ -22,6 +22,7 @@ exports.uploadImages = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 exports.listImages = async (req, res) => {
   const { path, sort, max } = req.body;
 

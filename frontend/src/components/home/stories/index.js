@@ -41,9 +41,9 @@ export default function Stories() {
       {stories.slice(0, max).map((story, i) => (
         <Story story={story} key={i} />
       ))}
-      <div className="white_circle">
+      {/* <div className="white_circle">
         <ArrowRight color="#65676b" />
-      </div>
+      </div> */}
     </div>
   );
 }

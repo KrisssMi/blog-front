@@ -76,7 +76,7 @@ export default function LoginForm({ setVisible }) {
                 <LoginInput
                   type="text"
                   name="email"
-                  placeholder="Email address or phone number"
+                  placeholder="Email address"
                   onChange={handleLoginChange}
                 />
                 <LoginInput
