@@ -27,6 +27,7 @@ const {
   getFriendsPageInfos,
   blockUser,
   unblockUser,
+  getStatusBlocked,
 } = require("../controllers/user");
 const { authUser } = require("../middlwares/auth");
 
@@ -60,5 +61,6 @@ router.get("/getFriendsPageInfos", authUser, getFriendsPageInfos);
 // Блокировать пользователя:
 router.put("/admin/blockUser/:userId", authUser, blockUser);
 router.put("/admin/unblockUser/:userId", authUser, unblockUser);
+router.get("/admin/getStatusBlocked/:userId", authUser, getStatusBlocked);
 
 module.exports = router;

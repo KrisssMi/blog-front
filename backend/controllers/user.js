@@ -690,3 +690,25 @@ exports.unblockUser = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+exports.getStatusBlocked = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    var userAdmin = await User.findById(req.user.id);
+    var roleUser = userAdmin.role;
+
+    if (!req.user || roleUser !== "Admin") {
+      return res
+        .status(403)
+        .json({ message: "Access denied. You do not have admin rights." });
+    }
+
+    res.json({ isBlocked: user.blocked });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

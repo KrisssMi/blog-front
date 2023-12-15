@@ -14,6 +14,7 @@ import {
   unfriend,
   blockUser,
   unblockUser,
+  isUserBlocked,
 } from "../../functions/user";
 
 export default function Friendship({ friendshipp, profileid }) {
@@ -21,9 +22,19 @@ export default function Friendship({ friendshipp, profileid }) {
   useEffect(() => {
     setFriendship(friendshipp);
   }, [friendshipp]);
-  const [isBlocked, setIsBlocked] = useState(
-    localStorage.getItem("isBlocked") === "true"
-  );
+  const [isBlocked, setIsBlocked] = useState(false);
+  useEffect(() => {
+    if (profileid) {
+      checkIsUserBlocked();
+    }
+  }, [profileid]);
+  const checkIsUserBlocked = async () => {
+    const userToken = user.token;
+    try {
+      const user = await isUserBlocked(userToken, profileid);
+      setIsBlocked(user.data.isBlocked);
+    } catch (err) {}
+  };
   const [friendsMenu, setFriendsMenu] = useState(false);
   const [respondMenu, setRespondMenu] = useState(false);
   const menu = useRef(null);
@@ -51,7 +62,6 @@ export default function Friendship({ friendshipp, profileid }) {
 
       // Переключите состояние isBlocked
       setIsBlocked(!isBlocked);
-      localStorage.setItem("isBlocked", !isBlocked);
     } else {
       toast.error("You are not an admin");
     }

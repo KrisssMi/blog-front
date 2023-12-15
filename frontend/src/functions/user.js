@@ -274,3 +274,19 @@ export const getFriendsPageInfos = async (token) => {
     return error.response.data.message;
   }
 };
+
+export const isUserBlocked = async (token, userId) => {
+  try {
+    const { data } = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/admin/getStatusBlocked/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return { status: "ok", data };
+  } catch (error) {
+    return error.response.data.message;
+  }
+};
