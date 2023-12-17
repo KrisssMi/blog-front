@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/blog-front/static/css/main.22dc3144.css",
+    "main.js": "/blog-front/static/js/main.16be6dff.js",
+    "static/media/icons14.png": "/blog-front/static/media/icons14.91a88007ea2210f6443f.png",
+    "static/media/icons12.png": "/blog-front/static/media/icons12.2e0c15a0f3c5dc71befc.png",
+    "static/media/icons25.png": "/blog-front/static/media/icons25.e417e896bce9fd79143a.png",
+    "static/media/icons22.png": "/blog-front/static/media/icons22.f8d9bef058882dd989d5.png",
+    "static/media/icons29.png": "/blog-front/static/media/icons29.2c57b074a422dd9add48.png",
+    "static/media/icons34.png": "/blog-front/static/media/icons34.5242d0d40aa440234d1e.png",
+    "static/media/icons6.png": "/blog-front/static/media/icons6.793d87b8ffe818e0431a.png",
+    "static/media/icons20.png": "/blog-front/static/media/icons20.4b42575c0ce2394a64ef.png",
+    "static/media/icons7.png": "/blog-front/static/media/icons7.c27f93aded51f1b11d69.png",
+    "static/media/icons40.png": "/blog-front/static/media/icons40.ccdf8ffe3004f6d0577d.png",
+    "static/media/icons18.png": "/blog-front/static/media/icons18.6cffd8045e3fcf462167.png",
+    "static/media/icons2.png": "/blog-front/static/media/icons2.f9ffd2dce564e10a01d9.png",
+    "static/media/icons5.png": "/blog-front/static/media/icons5.3b772f30f229ba08c05b.png",
+    "index.html": "/blog-front/index.html",
+    "main.22dc3144.css.map": "/blog-front/static/css/main.22dc3144.css.map",
+    "main.16be6dff.js.map": "/blog-front/static/js/main.16be6dff.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.22dc3144.css",
+    "static/js/main.16be6dff.js"
+  ]
+}
